@@ -47,13 +47,11 @@ func (cola *colaEnlazada[T]) Desencolar() T {
 	if cola.EstaVacia() {
 		panic(mensajePanic)
 	}
-
 	desencolado := cola.primero
 	cola.primero = cola.primero.prox
 
-	if cola.primero.prox == nil {
-		cola.ultimo = cola.primero
+	if cola.primero == nil {
+		cola.ultimo = nil
 	}
-
 	return desencolado.dato
 }
