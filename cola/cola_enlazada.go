@@ -17,6 +17,11 @@ func CrearColaEnlazada[T any]() Cola[T] {
 	return &colaEnlazada[T]{nil, nil}
 }
 
+/*Función para crear el nodo de la cola enlazada, lo instancia con nil como valor del campo prox */
+func CrearNodoCola[T any](datoNuevo T) *nodoCola[T] {
+	return &nodoCola[T]{dato: datoNuevo, prox: nil}
+}
+
 /* EstaVacia devuelve verdadero si la cola no tiene elementos encolados, false en caso contrario. */
 func (cola *colaEnlazada[T]) EstaVacia() bool {
 	return cola.primero == nil
@@ -27,18 +32,18 @@ func (cola *colaEnlazada[T]) VerPrimero() T {
 	if cola.primero == nil {
 		panic(mensajePanic)
 	}
-	return cola.ultimo.dato
+	return cola.primero.dato
 }
 
 /* Encolar agrega un nuevo elemento a la cola, al final de la misma.*/
-func (cola *colaEnlazada[T]) Encolar(dato_nuevo T) {
-	nuevo_ultimo := &nodoCola[T]{dato_nuevo, nil}
+func (cola *colaEnlazada[T]) Encolar(datoNuevo T) {
+	nuevoUltimo := CrearNodoCola(datoNuevo)
 	if cola.EstaVacia() {
-		cola.ultimo = nuevo_ultimo
-		cola.primero = nuevo_ultimo
+		cola.ultimo = nuevoUltimo
+		cola.primero = nuevoUltimo
 	} else {
-		cola.ultimo.prox = nuevo_ultimo
-		cola.ultimo = nuevo_ultimo
+		cola.ultimo.prox = nuevoUltimo
+		cola.ultimo = nuevoUltimo
 	}
 }
 

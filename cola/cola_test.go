@@ -30,10 +30,11 @@ func TestColaVolumen(t *testing.T) {
 	cola := TDACola.CrearColaEnlazada[int]()
 	for i := 0; i < 1001; i++ {
 		cola.Encolar(i)
-		require.Equal(t, i, cola.VerPrimero())
+		require.Equal(t, 0, cola.VerPrimero())
 	}
 
 	for i := 0; i < 1001; i++ {
+		require.Equal(t, i, cola.VerPrimero())
 		require.Equal(t, i, cola.Desencolar())
 	}
 
@@ -43,9 +44,9 @@ func TestColaVolumen(t *testing.T) {
 }
 
 func TestColaValoresBorde(t *testing.T) {
-	cola_string := TDACola.CrearColaEnlazada[string]()
-	cola_string.Encolar("")
-	require.False(t, cola_string.EstaVacia())
-	require.Equal(t, "", cola_string.VerPrimero())
-	require.Equal(t, "", cola_string.Desencolar())
+	colaString := TDACola.CrearColaEnlazada[string]()
+	colaString.Encolar("")
+	require.False(t, colaString.EstaVacia())
+	require.Equal(t, "", colaString.VerPrimero())
+	require.Equal(t, "", colaString.Desencolar())
 }
